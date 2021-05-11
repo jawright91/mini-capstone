@@ -1,28 +1,11 @@
 class ProductsController < ApplicationController
   def index
     products = Product.all
-    render json: products.as_json
+    render json: products
   end
 
   def show
-    if params["id"] == nil
-      product = "error: no product entered"
-    else
-      product = Product.find_by(id: params["id"])
-      if product == nil
-        product = "Invalid ID"
-      end
-    end
-    render json: product.as_json
-  end
-
-  def update
-    product = Product.find_by(id: params[:id])
-    product.name = params[:name] || product.name
-    product.price = params[:price] || product.price
-    product.image_url = params[:image_url] || product.image_url
-    product.description = params[:description] || product.description
-    product.save
+    product = Product.find_by(id: params["id"])
     render json: product
   end
 
@@ -39,5 +22,21 @@ class ProductsController < ApplicationController
       new_product.save
       render json: new_product
     end
+  end
+
+  def update
+    product = Product.find_by(id: params[:id])
+    product.name = params[:name] || product.name
+    product.price = params[:price] || product.price
+    product.image_url = params[:image_url] || product.image_url
+    product.description = params[:description] || product.description
+    product.save
+    render json: product
+  end
+
+  def destroy
+    product = Product.find_by(id: params[:id])
+    product.destroy
+    render json: { message: "The unclean product has been purged. Glory to the empire." }
   end
 end
