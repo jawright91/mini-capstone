@@ -15,12 +15,12 @@ class ProductsController < ApplicationController
       price: params[:price],
       image_url: params[:image_url],
       description: params[:description],
+      inventory: params[:inventory],
     )
-    if params[:name] == nil || params[:price] == nil || params[:image_url] == nil || params[:description] == nil || params[:name] == "" || params[:price] == "" || params[:image_url] == "" || params[:description] == ""
-      render json: { message: "Invalid entry. Please enter a name, price, image_url, or description." }
-    else
-      new_product.save
+    if new_product.save
       render json: new_product
+    else
+      render json: { errors: new_product.errors.full_messages }, status: 418
     end
   end
 
