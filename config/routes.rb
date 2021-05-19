@@ -27,4 +27,11 @@ Rails.application.routes.draw do
   # patch "/sessions/:id" => "sessions#update"
   # put "/sessions/" => "sessions#update"
   # delete "/sessions/:id" => "sessions#destroy"
+
+  get "/orders" => "orders#index"
+  get "/orders/:id" => "orders#show"
+  post "/orders" => "orders#create"
+  # patch "/orders/:id" => "orders#update"
+  # put "/orders/" => "orders#update"
+  # delete "/orders/:id" => "orders#destroy"
 end
