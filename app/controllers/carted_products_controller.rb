@@ -1,6 +1,5 @@
 class CartedProductsController < ApplicationController
   before_action :authenticate_user
-  validates :quantity, numericality: { greater_than: 0 }
 
   def create
     cartedproduct = CartedProduct.new(
